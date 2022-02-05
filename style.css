@@ -173,3 +173,17 @@ body {
   cursor: pointer;
 }
 
+.total-price {
+  margin: 20px 0px;
+  font-size: 22px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  /* fonte do '&nbsp': https://pt.wikihow.com/Inserir-Espa%C3%A7os-no-HTML */
+}
+
+#subtotal {
+  margin-left: 1px;
+}
+

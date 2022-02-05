@@ -1,11 +1,13 @@
 const firstSectionItem = document.querySelectorAll('.items')[0];
 const cartItems = document.querySelectorAll('.cart__items')[0];
+const emptyBtn = document.querySelector('.empty-cart');
+const subtotal = document.getElementById('subtotal');
 
 function cartItemClickListener(event) {
   // coloque seu código aqui
   const element = event.target;
   const fullCartItem = element.parentNode;
-  cartItems.removeChild(fullCartItem);
+  cartItems.removeChild(element);
 }
 
 function getSkuFromProductItem(item) {
@@ -26,6 +28,12 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
+const sumSubTotal = (newElement) => {
+  const floatSubtotal = parseFloat(subtotal.innerText);
+  const floatNewElement = parseFloat(newElement);  
+  return (floatSubtotal + floatNewElement).toFixed(2);
+};
+
 const appendCart = async (event) => {
   const card = event.target;
   const cardId = getSkuFromProductItem(card.parentNode);
@@ -41,7 +49,8 @@ const appendCart = async (event) => {
   closeBtn.classList.add('cartItemDiv');
   closeBtn.addEventListener('click', cartItemClickListener);
   cartItems.appendChild(cardItem);
-  cardItem.appendChild(closeBtn);
+  cardItem.appendChild(closeBtn);  
+  subtotal.innerText = sumSubTotal(cardObj.salePrice);
 };
 
 function createCustomElement(element, className, innerText) {
@@ -66,16 +75,13 @@ function createProductItemElement({ sku, name, image }) {
   return section;
 }
 
-/* const appendCart = async (query, parentNode) => {
-  const data = await fetchItem(query);
-  const selectedItem = {
-    sku: data.id,
-    name: data.title,
-    salePrice: data.price,
-  };
-  const cartItem = createCartItemElement(selectedItem);
-  parentNode.appendChild(cartItem);
-}; */
+const emptyCart = () => {
+  const allCartItems = [...cartItems.children];
+  allCartItems.forEach((element) => cartItems.removeChild(element));
+  // Esta dica o Anderson Rodrigues quem deu no slack, OBRIGADO! :)
+};
+
+emptyBtn.addEventListener('click', emptyCart);
 
 const appendProduct = async (query, parentNode) => {
   const data = await fetchProducts(query);
