@@ -147,3 +147,29 @@ body {
   border: 2px solid rgb(5, 52, 219);
   background-color: rgb(249, 249, 246);
 }
+
+.chosenItem {
+  display: flex;
+  flex-flow: row nowrap;
+  min-height: 80px;  
+  margin: 10px 15px 0px;
+  padding-left: 5px;  
+}
+
+.cartItemDiv {  
+  display: flex;
+  height: 35px;
+  flex-flow: row nowrap;
+  justify-content: center;
+    
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.cartItemDiv:after{  
+  font-size: 40px;
+  height: 40px;
+  content: "\00d7"; /* fonte: https://stackoverflow.com/questions/18611195/x-close-button-only-using-css */
+  cursor: pointer;
+}
+
