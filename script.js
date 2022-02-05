@@ -5,9 +5,8 @@ const totalPrice = document.querySelector('.total-price');
 
 function cartItemClickListener(event) {
   // coloque seu código aqui
-  const element = event.target;
-  const fullCartItem = element.parentNode;
-  cartItems.removeChild(element);
+  const cartElement = event.target;  
+  cartItems.removeChild(cartElement);
 }
 
 function getSkuFromProductItem(item) {
