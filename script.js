@@ -1,7 +1,7 @@
 const firstSectionItem = document.querySelectorAll('.items')[0];
 const cartItems = document.querySelectorAll('.cart__items')[0];
 const emptyBtn = document.querySelector('.empty-cart');
-const subtotal = document.getElementById('subtotal');
+const totalPrice = document.querySelector('.total-price');
 
 function cartItemClickListener(event) {
   // coloque seu código aqui
@@ -29,9 +29,9 @@ function createCartItemElement({ sku, name, salePrice }) {
 }
 
 const sumSubTotal = (newElement) => {
-  const floatSubtotal = parseFloat(subtotal.innerText);
+  const floatTotalPrice = parseFloat(totalPrice.innerText);
   const floatNewElement = parseFloat(newElement);  
-  return (floatSubtotal + floatNewElement).toFixed(2);
+  return floatTotalPrice + floatNewElement;
 };
 
 const appendCart = async (event) => {
@@ -47,10 +47,10 @@ const appendCart = async (event) => {
   cardItem.classList.add('chosenItem');
   const closeBtn = document.createElement('div');
   closeBtn.classList.add('cartItemDiv');
-  closeBtn.addEventListener('click', cartItemClickListener);
+  cardItem.addEventListener('click', cartItemClickListener);
   cartItems.appendChild(cardItem);
   cardItem.appendChild(closeBtn);  
-  subtotal.innerText = sumSubTotal(cardObj.salePrice);
+  totalPrice.innerText = sumSubTotal(cardObj.salePrice);
 };
 
 function createCustomElement(element, className, innerText) {
@@ -79,6 +79,7 @@ const emptyCart = () => {
   const allCartItems = [...cartItems.children];
   allCartItems.forEach((element) => cartItems.removeChild(element));
   // Esta dica o Anderson Rodrigues quem deu no slack, OBRIGADO! :)
+  totalPrice.innerText = '0,00';
 };
 
 emptyBtn.addEventListener('click', emptyCart);
