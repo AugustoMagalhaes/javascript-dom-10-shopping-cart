@@ -151,36 +151,34 @@ body {
 .chosenItem {
   display: flex;
   flex-flow: row nowrap;
-  min-height: 80px;  
-  margin: 10px 15px 0px;
-  padding-left: 5px;  
+  min-height: 80px;
+  margin: 10px 15px;
+  padding-left: 5px;
 }
 
-.cartItemDiv {  
+.cartItemDiv {
   display: flex;
   height: 35px;
   flex-flow: row nowrap;
   justify-content: center;
-    
   align-items: flex-end;
   padding-bottom: 10px;
 }
 
-.cartItemDiv:after{  
-  font-size: 40px;
-  height: 40px;
-  content: "\00d7"; /* fonte: https://stackoverflow.com/questions/18611195/x-close-button-only-using-css */
-  cursor: pointer;
+.cartItemDiv:after {
+  font-size: 40px; /* Lint styles me forçou a isto */
+  height: 40px; /* fonte: */
+  content: '\00d7'; /* https://stackoverflow.com/questions/ */
+  cursor: pointer; /* 18611195/x-close-button-only-using-css */
 }
 
 .subtotal {
-  margin: 20px 0px;
+  margin: 20px;
   font-size: 22px;
   margin-bottom: 20px;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  /* fonte do '&nbsp': https://pt.wikihow.com/Inserir-Espa%C3%A7os-no-HTML */
+  flex-flow: row nowrap; /* fonte do '&nbsp': */
+  justify-content: center; /* https://pt.wikihow.com/Inserir-Espa%C3%A7os-no-HTML */
 }
 
 .total-price {
