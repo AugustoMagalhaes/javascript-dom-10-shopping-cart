@@ -39,10 +39,8 @@ const sumSubTotal = async (obj) => {
   return totalPrice;
 };
 
-const appendCart = async (event) => {
-  const card = event.target;
-  const cardId = getSkuFromProductItem(card.parentNode);
-  const getItem = await fetchItem(cardId);
+const realAppend = async (itemId) => {
+  const getItem = await fetchItem(itemId);
   const cardObj = {
     sku: getItem.id,
     name: getItem.title,
@@ -56,6 +54,13 @@ const appendCart = async (event) => {
   cartItems.appendChild(cardItem);
   cardItem.appendChild(closeBtn);  
   sumSubTotal(getItem);
+  saveCartItems(cardItem);
+};
+
+const appendCart = async (event) => {
+  const cardBtn = event.target;
+  const cardId = getSkuFromProductItem(cardBtn.parentNode);
+  realAppend(cardId);
 };
 
 function createCustomElement(element, className, innerText) {
@@ -81,10 +86,10 @@ function createProductItemElement({ sku, name, image }) {
 }
 
 const emptyCart = () => {
-  const allCartItems = [...cartItems.children];
+  const allCartItems = [...cartItems.childNodes];
   allCartItems.forEach((element) => cartItems.removeChild(element));
-  // Esta dica o Anderson Rodrigues quem deu no slack, OBRIGADO! :)
   totalPrice.innerText = '0.00';
+  localStorage.clear();
 };
 
 emptyBtn.addEventListener('click', emptyCart);
@@ -103,12 +108,23 @@ const appendProduct = async (query, parentNode) => {
   });
 };
 
+const appendSavedItems = async () => {
+  const idArray = getSavedCartItems('cartItems');
+  idArray.forEach((element) => {
+    realAppend(element);
+  });
+};
+
 window.onload = () => { 
-  appendProduct('computador', firstSectionItem); 
+  appendProduct('computador', firstSectionItem);
+  if (localStorage.length > 0) {
+    appendSavedItems();
+  }
 };
 
 if (typeof module !== 'undefined') {
   module.exports = {
-    appendProduct,
+    appendProduct, 
+    realAppend,
   };
 }
