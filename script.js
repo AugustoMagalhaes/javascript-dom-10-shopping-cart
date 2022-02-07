@@ -6,7 +6,6 @@ const totalPrice = document.querySelector('.total-price');
 const stringifyContent = () => {
   const cartItemsContent = cartItems.innerHTML;
   const stringifiedCartItems = JSON.stringify(cartItemsContent);
-  console.log('opa', stringifiedCartItems);
   saveCartItems(stringifiedCartItems);
 };
 
@@ -42,8 +41,8 @@ const sumSubTotal = async (obj) => {
   const checkObj = await fetchItem(obj.id);
   const floatPrice = parseFloat(totalPrice.innerText);
   const newItemPrice = parseFloat(checkObj.price);
-  const newText = await (floatPrice + newItemPrice);  
-  totalPrice.innerText = newText;
+  const newText = await (floatPrice + newItemPrice);
+  totalPrice.innerText = newText; 
   stringifyContent();
   return totalPrice;
 };
