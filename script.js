@@ -3,6 +3,13 @@ const cartItems = document.querySelectorAll('.cart__items')[0];
 const emptyBtn = document.querySelector('.empty-cart');
 const totalPrice = document.querySelector('.total-price');
 
+const stringifyContent = () => {
+  const cartItemsContent = cartItems.innerHTML;
+  const stringifiedCartItems = JSON.stringify(cartItemsContent);
+  console.log('opa', stringifiedCartItems);
+  saveCartItems(stringifiedCartItems);
+};
+
 function cartItemClickListener(event) {
   // coloque seu código aqui
   const cartElement = event.target;
@@ -10,6 +17,7 @@ function cartItemClickListener(event) {
   const finalPrice = parseFloat(totalPrice.innerText - cartElementPrice);  
   totalPrice.innerText = (finalPrice > 0.5) ? finalPrice : '0.00';
   cartItems.removeChild(cartElement);
+  stringifyContent();
 }
 
 function getSkuFromProductItem(item) {
@@ -36,10 +44,11 @@ const sumSubTotal = async (obj) => {
   const newItemPrice = parseFloat(checkObj.price);
   const newText = await (floatPrice + newItemPrice);  
   totalPrice.innerText = newText;
+  stringifyContent();
   return totalPrice;
 };
 
-const realAppend = async (itemId) => {
+const prepareToAppend = async (itemId) => {
   const getItem = await fetchItem(itemId);
   const cardObj = {
     sku: getItem.id,
@@ -53,16 +62,14 @@ const realAppend = async (itemId) => {
   cardItem.addEventListener('click', cartItemClickListener);
   cartItems.appendChild(cardItem);
   cardItem.appendChild(closeBtn);  
-  sumSubTotal(getItem);
-  saveCartItems(cardItem);
+  sumSubTotal(getItem);  
 };
 
 const appendCart = async (event) => {
   const cardBtn = event.target;
   const cardId = getSkuFromProductItem(cardBtn.parentNode);
-  realAppend(cardId);
+  prepareToAppend(cardId);  
 };
-
 function createCustomElement(element, className, innerText) {
   const e = document.createElement(element);
   e.className = className;
@@ -109,9 +116,12 @@ const appendProduct = async (query, parentNode) => {
 };
 
 const appendSavedItems = async () => {
-  const idArray = getSavedCartItems('cartItems');
-  idArray.forEach((element) => {
-    realAppend(element);
+  const cartItemsValue = getSavedCartItems();
+  const parsedCartItems = JSON.parse(cartItemsValue);
+  const splitedParsedCartItems = parsedCartItems.split(' ');
+  const savedIds = splitedParsedCartItems.filter((element) => element.startsWith('ML'));  
+  savedIds.forEach((element) => {
+    prepareToAppend(element);
   });
 };
 
@@ -125,6 +135,6 @@ window.onload = () => {
 if (typeof module !== 'undefined') {
   module.exports = {
     appendProduct, 
-    realAppend,
+    prepareToAppend,
   };
 }

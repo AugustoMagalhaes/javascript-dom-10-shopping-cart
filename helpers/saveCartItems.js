@@ -1,8 +1,6 @@
 const saveCartItems = (item) => {
-  // seu código aqui
-  const parentItem = item.parentNode;
-  const stringifiedParentItem = JSON.stringify(parentItem.innerHTML);
-  localStorage.setItem('cartItems', stringifiedParentItem);
+  // seu código aqui  
+  localStorage.setItem('cartItems', item);
 };
 
 if (typeof module !== 'undefined') {
