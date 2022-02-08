@@ -146,6 +146,7 @@ body {
   margin: 0 auto;
   border: 2px solid rgb(5, 52, 219);
   background-color: rgb(249, 249, 246);
+  cursor: pointer;
 }
 
 .chosenItem {
@@ -166,7 +167,7 @@ body {
 }
 
 .cartItemDiv:after {
-  font-size: 40px; /* Lint styles me forçou a isto */
+  font-size: 40px; /* Lint styles me forçou a quebrar assim */
   height: 40px; /* fonte: */
   content: '\00d7'; /* https://stackoverflow.com/questions/ */
   cursor: pointer; /* 18611195/x-close-button-only-using-css */
@@ -183,5 +184,51 @@ body {
 
 .total-price {
   margin-left: 1px;
+}
+
+.loader-wrapper {
+  position: fixed;
+  z-index: 1000;
+  width: 100vw;
+  display: none;
+  height: 100vh;
+  background-color: rgb(219, 225, 230);
+  opacity: 0.7;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+#loader-container {
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  flex-flow: column nowrap;
+  top: 40%;
+  left: 40%;
+}
+
+.loader {
+  border: 16px solid rgb(246, 246, 246);
+  border-top: 16px solid rgb(10, 118, 79);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  align-self: center;
+}
+
+.loading {
+  font-size: 30px;
+  font-weight: 900;
+  color: rgb(10, 118, 79);
+  margin-top: 10px;
+}
+
+@keyframes spin {
+
+  0% { transform: rotate(0deg); }
+
+  /* fonte do loader: https://www.w3schools.com/howto/howto_css_loader.asp */
+  100% { transform: rotate(360deg); }
 }
 
