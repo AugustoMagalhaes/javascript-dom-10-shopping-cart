@@ -1,5 +1,4 @@
 const fetchItem = async (query) => {
-  // seu código aqui
   const url = `https://api.mercadolibre.com/items/${query}`;
   
   try {
