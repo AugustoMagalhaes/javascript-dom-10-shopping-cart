@@ -108,13 +108,15 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
-function createProductItemElement({ sku, name, image }) {
+function createProductItemElement({ sku, name, image, price }) {
   const section = document.createElement('section');
   section.className = 'item';
+  const displayPrice = `R$: ${price.toFixed(2)}`
 
   section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
+  section.appendChild(createCustomElement('span', 'item__price', displayPrice))
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
 
   return section;
@@ -138,6 +140,7 @@ const appendProduct = async (query, parentNode) => {
       sku: product.id,
       name: product.title,
       image: product.thumbnail,
+      price: product.price,
     };
     const item = createProductItemElement(productObj);
     parentNode.appendChild(item);
