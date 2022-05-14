@@ -132,6 +132,7 @@ body {
 .item__price {
   font-weight: 600;
   color: rgb(31, 31, 31);
+  margin-bottom: 5px;
 }
 
 .cart {
@@ -186,6 +187,7 @@ body {
   justify-content: center;
   align-items: flex-end;
   padding-bottom: 10px;
+  color: red;
 }
 
 .cartItemDiv:after {
