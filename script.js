@@ -50,11 +50,17 @@ function createProductImageElement(imageSource) {
   return img;
 }
 
-function createCartItemElement({ sku, name, salePrice }) {
+function createCartItemElement({ sku, name, salePrice, thumbnail }) {
+  const section = document.createElement('section');
   const li = document.createElement('li');
+  const img = document.createElement('img');
+  img.src = thumbnail;
+  img.className = 'cart__item-img'
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-  return li;
+  section.appendChild(img);
+  section.appendChild(li)
+  return section;
 }
 
 const sumSubTotal = async (obj) => {
@@ -75,6 +81,7 @@ const prepareToAppend = async (itemId) => {
     sku: getItem.id,
     name: getItem.title,
     salePrice: getItem.price,
+    thumbnail: getItem.thumbnail,
   };
   const cardItem = createCartItemElement(cardObj);
   cardItem.classList.add('chosenItem');

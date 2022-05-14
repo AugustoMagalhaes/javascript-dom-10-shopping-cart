@@ -136,8 +136,21 @@ body {
 }
 
 .cart .cart__items {
-  height: 500px;
+  height: 700px;
   overflow-y: scroll;
+}
+
+.cart__item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.cart__item-img {
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
 }
 
 .empty-cart {
@@ -231,4 +244,3 @@ body {
   /* fonte do loader: https://www.w3schools.com/howto/howto_css_loader.asp */
   100% { transform: rotate(360deg); }
 }
-
