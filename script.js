@@ -5,6 +5,8 @@ const totalPrice = document.querySelector('.total-price');
 const loaderContainer = document.getElementById('loader-container');
 const loaderElement = document.getElementsByClassName('loader-wrapper')[0];
 
+console.log('all', createCategoriesOptions())
+
 const stringifyContent = () => {
   const cartItemsContent = cartItems.innerHTML;
   const stringifiedCartItems = JSON.stringify(cartItemsContent);
