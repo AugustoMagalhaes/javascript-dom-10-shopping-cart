@@ -31,12 +31,11 @@ const loadDestroyer = () => {
 };
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
   const cartElement = event.target;
-  const cartElementPrice = cartElement.innerText.split('PRICE: $')[1].trim();
+  const cartElementPrice = cartElement.parentNode.innerText.split('PRICE: $')[1].trim();
   const finalPrice = parseFloat(totalPrice.innerText - cartElementPrice);
   totalPrice.innerText = (finalPrice > 0.5) ? finalPrice : '0.00';
-  cartItems.removeChild(cartElement);
+  cartItems.removeChild(cartElement.parentNode);
   stringifyContent();
 }
 
@@ -62,7 +61,7 @@ const sumSubTotal = async (obj) => {
   const checkObj = await fetchItem(obj.id);
   const floatPrice = parseFloat(totalPrice.innerText);
   const newItemPrice = parseFloat(checkObj.price);
-  const newText = await (floatPrice + newItemPrice);
+  const newText = (floatPrice + newItemPrice);
   totalPrice.innerText = newText;
   stringifyContent();
   return totalPrice;
@@ -81,7 +80,7 @@ const prepareToAppend = async (itemId) => {
   cardItem.classList.add('chosenItem');
   const closeBtn = document.createElement('div');
   closeBtn.classList.add('cartItemDiv');
-  cardItem.addEventListener('click', cartItemClickListener);
+  closeBtn.addEventListener('click', cartItemClickListener);
   cartItems.appendChild(cardItem);
   cardItem.appendChild(closeBtn);
   sumSubTotal(getItem);
