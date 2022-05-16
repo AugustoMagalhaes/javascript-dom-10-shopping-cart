@@ -4,8 +4,16 @@ const emptyBtn = document.querySelector('.empty-cart');
 const totalPrice = document.querySelector('.total-price');
 const loaderContainer = document.getElementById('loader-container');
 const loaderElement = document.getElementsByClassName('loader-wrapper')[0];
+const searchButton = document.getElementById('search-btn');
+const selectCategories = document.getElementById('search-items');
 
-console.log('all', createCategoriesOptions())
+const searchNewCategory = () => {
+  const category = selectCategories.selectedOptions[0].value;
+  firstSectionItem.innerHTML = '';
+  appendProduct(category, firstSectionItem);
+}
+
+searchButton.addEventListener('click', searchNewCategory);
 
 const stringifyContent = () => {
   const cartItemsContent = cartItems.innerHTML;
