@@ -258,12 +258,12 @@ body {
 }
 
 #search-items {
-  width: 200px;
+  width: 250px;
   border-radius: 0;
   background-color: rgb(249, 249, 249);
   border: none;
   margin: 6px 0 10px 0px;
-  height: 18px;
+  height: 20px;
   font-size: 18px;
 }
 

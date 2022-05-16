@@ -167,6 +167,7 @@ window.onload = () => {
   if (localStorage.length > 0) {
     appendSavedItems();
   }
+  createCategoriesOptions();
 };
 
 if (typeof module !== 'undefined') {
