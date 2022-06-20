@@ -13,4 +13,8 @@ const createCategoriesOptions = async () =>  {
     }
     categoriesSelect.appendChild(categoryOption);
   });
+  const initialCategory = localStorage.getItem('initialCategory') || 'Computador';
+  categoriesSelect.value = initialCategory;
+  const actualIndex = findInitialCategoryIndex(initialCategory);
+  selectCategories.selectedIndex = actualIndex;
 };

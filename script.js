@@ -10,7 +10,14 @@ const selectCategories = document.getElementById('search-items');
 const searchNewCategory = () => {
   const category = selectCategories.selectedOptions[0].value;
   firstSectionItem.innerHTML = '';
+  localStorage.setItem('initialCategory', category);
   appendProduct(category, firstSectionItem);
+}
+
+const findInitialCategoryIndex = (initialCategory) => {
+  const test = [...selectCategories.options];
+  const actualOptionIndex = test.findIndex((el) => el.value === initialCategory);
+  return actualOptionIndex;
 }
 
 searchButton.addEventListener('click', searchNewCategory);
@@ -171,13 +178,17 @@ const appendSavedItems = async () => {
 };
 
 window.onload = () => {
-  const initialCategory = localStorage.getItem('initialCategory') || 'computador';
+  const initialCategory = localStorage.getItem('initialCategory') || 'Computador';
   /* selectCategories.selectedOptions[0].value = initialCategory; */
   appendProduct(initialCategory, firstSectionItem);
   if (localStorage.length > 0) {
     appendSavedItems();
   }
   createCategoriesOptions();
+  /* selectCategories.value = initialCategory;
+  const actualIndex = findInitialCategoryIndex(initialCategory);
+  console.log(selectCategories.options)
+  selectCategories.selectedIndex = actualIndex; */
 };
 
 if (typeof module !== 'undefined') {
