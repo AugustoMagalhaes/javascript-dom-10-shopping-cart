@@ -171,7 +171,9 @@ const appendSavedItems = async () => {
 };
 
 window.onload = () => {
-  appendProduct('computador', firstSectionItem);
+  const initialCategory = localStorage.getItem('initialCategory') || 'computador';
+  /* selectCategories.selectedOptions[0].value = initialCategory; */
+  appendProduct(initialCategory, firstSectionItem);
   if (localStorage.length > 0) {
     appendSavedItems();
   }
