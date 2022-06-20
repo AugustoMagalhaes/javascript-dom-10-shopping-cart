@@ -4,8 +4,16 @@ const emptyBtn = document.querySelector('.empty-cart');
 const totalPrice = document.querySelector('.total-price');
 const loaderContainer = document.getElementById('loader-container');
 const loaderElement = document.getElementsByClassName('loader-wrapper')[0];
+const searchButton = document.getElementById('search-btn');
+const selectCategories = document.getElementById('search-items');
 
-console.log('all', createCategoriesOptions())
+const searchNewCategory = () => {
+  const category = selectCategories.selectedOptions[0].value;
+  firstSectionItem.innerHTML = '';
+  appendProduct(category, firstSectionItem);
+}
+
+searchButton.addEventListener('click', searchNewCategory);
 
 const stringifyContent = () => {
   const cartItemsContent = cartItems.innerHTML;
@@ -39,18 +47,18 @@ function cartItemClickListener(event) {
   totalPrice.innerText = (finalPrice > 0.5) ? finalPrice.toFixed(2) : '0.00';
   cartItems.removeChild(cartElement.parentNode);
   stringifyContent();
-}
+};
 
 function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
-}
+};
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
   img.src = imageSource;
   return img;
-}
+};
 
 function createCartItemElement({ sku, name, salePrice, thumbnail }) {
   const section = document.createElement('section');
@@ -63,7 +71,7 @@ function createCartItemElement({ sku, name, salePrice, thumbnail }) {
   section.appendChild(img);
   section.appendChild(li)
   return section;
-}
+};
 
 const sumSubTotal = async (obj) => {
   const checkObj = await fetchItem(obj.id);
@@ -108,7 +116,7 @@ function createCustomElement(element, className, innerText) {
     e.addEventListener('click', appendCart);
   }
   return e;
-}
+};
 
 function createProductItemElement({ sku, name, image, price }) {
   const section = document.createElement('section');
@@ -122,7 +130,7 @@ function createProductItemElement({ sku, name, image, price }) {
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
 
   return section;
-}
+};
 
 const emptyCart = () => {
   const allCartItems = [...cartItems.childNodes];
@@ -175,4 +183,4 @@ if (typeof module !== 'undefined') {
     appendProduct,
     prepareToAppend,
   };
-}
+};
