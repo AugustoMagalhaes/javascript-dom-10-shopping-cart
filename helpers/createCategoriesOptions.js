@@ -6,5 +6,5 @@ const createCategoriesOptions = async () =>  {
     categoryOption.value = option.name;
     categoryOption.innerText = option.name;
     categoriesSelect.appendChild(categoryOption);
-  })
-}
+  });
+};
