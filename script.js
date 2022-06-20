@@ -182,7 +182,6 @@ window.onload = () => {
   appendProduct(initialCategory, firstSectionItem);
   if (JSON.parse(localStorage.getItem('cartItems'))) {
     appendSavedItems();
-    console.log('save')
   }
   createCategoriesOptions();
 };
