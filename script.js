@@ -179,16 +179,11 @@ const appendSavedItems = async () => {
 
 window.onload = () => {
   const initialCategory = localStorage.getItem('initialCategory') || 'Computador';
-  /* selectCategories.selectedOptions[0].value = initialCategory; */
   appendProduct(initialCategory, firstSectionItem);
   if (localStorage.length > 0) {
     appendSavedItems();
   }
   createCategoriesOptions();
-  /* selectCategories.value = initialCategory;
-  const actualIndex = findInitialCategoryIndex(initialCategory);
-  console.log(selectCategories.options)
-  selectCategories.selectedIndex = actualIndex; */
 };
 
 if (typeof module !== 'undefined') {
