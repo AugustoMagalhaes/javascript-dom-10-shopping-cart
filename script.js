@@ -180,8 +180,9 @@ const appendSavedItems = async () => {
 window.onload = () => {
   const initialCategory = localStorage.getItem('initialCategory') || 'Computador';
   appendProduct(initialCategory, firstSectionItem);
-  if (localStorage.length > 0) {
+  if (JSON.parse(localStorage.getItem('cartItems'))) {
     appendSavedItems();
+    console.log('save')
   }
   createCategoriesOptions();
 };
