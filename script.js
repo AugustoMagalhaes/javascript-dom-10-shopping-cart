@@ -121,7 +121,7 @@ function createCustomElement(element, className, innerText) {
 function createProductItemElement({ sku, name, image, price }) {
   const section = document.createElement('section');
   section.className = 'item';
-  const displayPrice = `R$: ${price.toFixed(2)}`
+  const displayPrice = `R$ ${price.toFixed(2)}`
 
   section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('span', 'item__sku', sku));
